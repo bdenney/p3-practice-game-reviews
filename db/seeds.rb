@@ -2,6 +2,7 @@ puts "Clearing data..."
 User.destroy_all
 Game.destroy_all
 Category.destroy_all
+Review.destroy_all
 
 Faker::Game.unique.clear
 
@@ -22,5 +23,10 @@ puts "Creating games..."
 end
 
 # TODO: Create seeds for the models/migrations you have added
+puts "Creating reviews"
+10.times do
+    rating = Faker::Number.between(from: 1, to: 5)
+    Review.create(content: Faker::Quote.jack_handey, rating: rating, user: User.all.sample, game: Game.all.sample)
+end
 
 puts "Database seeded successfully!"
